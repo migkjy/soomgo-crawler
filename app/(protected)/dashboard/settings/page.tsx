@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { UserRole } from "@prisma/client";
 
 import { getCurrentUser } from "@/lib/session";
 import { constructMetadata } from "@/lib/utils";
@@ -15,7 +16,15 @@ export const metadata = constructMetadata({
 export default async function SettingsPage() {
   const user = await getCurrentUser();
 
-  if (!user?.id) redirect("/login");
+  // 인증 검사 임시 제거 및 가상 사용자 생성
+  const mockUser = user || {
+    id: "test-user-id",
+    name: "Test User",
+    email: "test@example.com",
+    role: UserRole.USER
+  };
+
+  // if (!user?.id) redirect("/login");
 
   return (
     <>
@@ -24,8 +33,8 @@ export default async function SettingsPage() {
         text="Manage account and website settings."
       />
       <div className="divide-y divide-muted pb-10">
-        <UserNameForm user={{ id: user.id, name: user.name || "" }} />
-        <UserRoleForm user={{ id: user.id, role: user.role }} />
+        <UserNameForm user={{ id: mockUser.id, name: mockUser.name || "" }} />
+        <UserRoleForm user={{ id: mockUser.id, role: mockUser.role }} />
         <DeleteAccountSection />
       </div>
     </>

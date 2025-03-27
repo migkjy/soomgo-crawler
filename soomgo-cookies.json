@@ -1,0 +1,442 @@
+[
+  {
+    "name": "sep_device_id",
+    "value": "65519387-ecb2-47b9-a2c4-2b6d5f8958d0",
+    "domain": "soomgo.com",
+    "path": "/",
+    "expires": 1774641676,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "ab_next_uuid",
+    "value": "c7dc6510-2fe1-471c-aefc-2dbea6643a7d_next",
+    "domain": "soomgo.com",
+    "path": "/",
+    "expires": 1753473668,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "mobile",
+    "value": "N",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1774641675,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "platform",
+    "value": "Mac%20OS",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1774641675,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "browser",
+    "value": "Chrome",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1774641675,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "referrer",
+    "value": "none",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1774641675,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "document_referrer",
+    "value": "none",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1774641675,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "ajs_anonymous_id",
+    "value": "710bd6b7-218b-46e7-86a5-55d74e91cdea",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1774641676,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "anonymous_id",
+    "value": "710bd6b7-218b-46e7-86a5-55d74e91cdea",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1774641668,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_fwb",
+    "value": "19PeeUY5f85zvboNmCtau5.1743105668878",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1777665676.516938,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "amplitude_idundefinedsoomgo.com",
+    "value": "eyJvcHRPdXQiOmZhbHNlLCJzZXNzaW9uSWQiOm51bGwsImxhc3RFdmVudFRpbWUiOm51bGwsImV2ZW50SWQiOjAsImlkZW50aWZ5SWQiOjAsInNlcXVlbmNlTnVtYmVyIjowfQ==",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_fbp",
+    "value": "fb.1.1743105668944.94498785012183597",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1750881676,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "NAC",
+    "value": "TlJ7BkgFfewmB",
+    "domain": ".naver.com",
+    "path": "/",
+    "expires": 1777665668.955128,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "uid",
+    "value": "887d1408-ade5-4d82-9ca0-2de337fa1b28",
+    "domain": ".criteo.com",
+    "path": "/",
+    "expires": 1776801669.013126,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "receive-cookie-deprecation",
+    "value": "1",
+    "domain": ".criteo.com",
+    "path": "/",
+    "expires": 1776801669.013157,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "_gid",
+    "value": "GA1.2.418638700.1743105669",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1743192076,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_gat_UA-65520923-1",
+    "value": "1",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1743105729,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_gcl_au",
+    "value": "1.1.620735785.1743105669",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1750881669,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "ar_debug",
+    "value": "1",
+    "domain": ".www.google-analytics.com",
+    "path": "/",
+    "expires": 1750881676.503669,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "authToken",
+    "value": "909ca5ab88fd4bdeb2f21c788433f8775e0c4a92",
+    "domain": "soomgo.com",
+    "path": "/",
+    "expires": 1744315270,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "current_usertype_1466234",
+    "value": "PROVIDER",
+    "domain": "soomgo.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "ajs_user_id",
+    "value": "1466234",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1774641676,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "ab_next_suid",
+    "value": "1466234_next",
+    "domain": "soomgo.com",
+    "path": "/",
+    "expires": 1753473671,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "ab_uuid",
+    "value": "1466234",
+    "domain": "soomgo.com",
+    "path": "/",
+    "expires": 1753473676,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "IDE",
+    "value": "AHWqTUmnLE-owN4F8tmY7U3EZ5rZSIRZYTxWJGHzsk_lxLnwy_b3k6aX8H7r2w4d",
+    "domain": ".doubleclick.net",
+    "path": "/",
+    "expires": 1777665671.786343,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "UUID",
+    "value": "bff2a13e-2b77-43c0-a4a0-0091485db177",
+    "domain": "soomgo.com",
+    "path": "/",
+    "expires": 1774641671,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "test",
+    "value": "U",
+    "domain": "t1.daumcdn.net",
+    "path": "/",
+    "expires": 1743109272.966444,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "__Host-test",
+    "value": "P",
+    "domain": "t1.daumcdn.net",
+    "path": "/",
+    "expires": 1743109272.966916,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "ab.storage.deviceId.11b65018-b5e1-4ccf-86bd-f114cf3caa79",
+    "value": "%7B%22g%22%3A%2204412d6f-1c5c-687a-03e4-b8379e54ad03%22%2C%22c%22%3A1743105671899%2C%22l%22%3A1743105672971%7D",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1777665672,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "ab.storage.userId.11b65018-b5e1-4ccf-86bd-f114cf3caa79",
+    "value": "%7B%22g%22%3A%221466234%22%2C%22c%22%3A1743105672969%2C%22l%22%3A1743105672972%7D",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1777665672,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_trs_id",
+    "value": "eY44%3E311775427%3E",
+    "domain": "soomgo.com",
+    "path": "/",
+    "expires": 1777665673.077976,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_trs_sid",
+    "value": "G%5B6461476%3C4145%5Bg%5B66%3C133557605%3C",
+    "domain": "soomgo.com",
+    "path": "/",
+    "expires": 1743107476,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_trs_flow",
+    "value": "",
+    "domain": "soomgo.com",
+    "path": "/",
+    "expires": 1743107476,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_ga_MMENLNN1X0",
+    "value": "GS1.1.1743105671.1.1.1743105675.56.0.0",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1777665675.043282,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "cto_bundle",
+    "value": "psj1JV9iRHJaZXY4JTJCRURvaVFkZno1TFE2RG1RMHYlMkZTSXh6YWhmSWh4eWslMkZBJTJCJTJCVzJkM3NwVTNvakdLUVo0Qm5wa0FWWFZRYU5VR2NNOHpvR2VPNEtJZUh1ckd3c1hkcndTSmhkanZzUnpRJTJGR3Z5eE54UWF6Z1RBS09JWHE5cWVTUDdmMCUyQndIaEExWXg4V2pjbUJqZmdrdTdGUSUzRCUzRA",
+    "domain": ".criteo.com",
+    "path": "/",
+    "expires": 1776801675.30515,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "cto_bundle",
+    "value": "DvxKr193RjRTTTl6RlVwZjdDSGYlMkJTJTJCbEhQcFhYOUl2R2lndzBUNm5hYVFMZlluUSUyQnJIaG4lMkJBNlRLa2ZoSXM3TVZWSDhWYk10ZDIzbWhZcDBMWUhJRXdtNmZEQlhrcVNHMHNLb0VocVlid2U1NGlORGJLc1hibVprVWlHakZUa3JhdE96c1BLQkUlMkZ0RWQlMkZuZllyZDU5SllNMVElM0QlM0Q",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1777269675,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_ga_GT7X501J23",
+    "value": "GS1.1.1743105669.1.1.1743105675.54.0.0",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1777665675.46218,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "referrer_datetime",
+    "value": "1743105675800",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1774641675,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "user_pseudo_id",
+    "value": "421187481.1743105669",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1774641675,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_ga",
+    "value": "GA1.2.421187481.1743105669",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1777665676.467044,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "wcs_bt",
+    "value": "s_5a2c0a52a8dc:1743105676",
+    "domain": "soomgo.com",
+    "path": "/",
+    "expires": 1777665676.518079,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "sep_web_token",
+    "value": "q7B8gS-dE1eQyxHyR6GEpFW_BJ6PstPqa2FpVwz-ZXZpwKpR4SM7bZHR48T_iCW5bt6SsoSlmfRo1ulaMvWn5mFGoB8SP-6L0DFKgDj67TjjK575NeeUjYdqZqAP2RONpQJMNXdh0yKAi-qIhexJ7yVGxjX5AU6ubOSYV3FFnLOwzyfJZZ3fTR0Fa9HXKoyLcjxZpMn8Ec2kjenLI7i8GwNnnodzpHf0kqX7Gu8RsXH_ayeqz6LG47v1pc7jGYoiFcEQZXyb1ZJdZgdyszojdzWACpE62l2V4Md47dTCxmplSlqbummin1p_w-zb7LUUJFqoqZkNf2ek4BE0JY1hPuKhrEqfcxnTULhVvVCSQ_bVFcHullJ6o5UWR69ecNMIFP8Hncq8QBYBxeGy-lhuZA",
+    "domain": "soomgo.com",
+    "path": "/",
+    "expires": 1753473676,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "ab.storage.sessionId.11b65018-b5e1-4ccf-86bd-f114cf3caa79",
+    "value": "%7B%22g%22%3A%2254ab860e-b465-dcb8-86a4-1accc1d949e6%22%2C%22e%22%3A1743107476761%2C%22c%22%3A1743105672971%2C%22l%22%3A1743105676761%7D",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1777665676,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "amplitude_id_d388fe2a7c6e2948278871aab18a1778soomgo.com",
+    "value": "eyJkZXZpY2VJZCI6IjcxMGJkNmI3LTIxOGItNDZlNy04NmE1LTU1ZDc0ZTkxY2RlYSIsInVzZXJJZCI6IjE0NjYyMzQiLCJvcHRPdXQiOmZhbHNlLCJzZXNzaW9uSWQiOjE3NDMxMDU2Njg5MjUsImxhc3RFdmVudFRpbWUiOjE3NDMxMDU2NzY3ODIsImV2ZW50SWQiOjYsImlkZW50aWZ5SWQiOjksInNlcXVlbmNlTnVtYmVyIjoxNX0=",
+    "domain": ".soomgo.com",
+    "path": "/",
+    "expires": 1777665676.782213,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  }
+]

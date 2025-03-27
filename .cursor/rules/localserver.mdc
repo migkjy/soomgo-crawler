@@ -1,0 +1,14 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Your rule content
+
+- You can @ files here
+- You can use markdown but dont have to
+
+서버실행을 할 때에는
+현재 실행 중인 서버를 확인하고 종료한 후 새로 실행
+동일한 서비스가 중복해서 여러개 실행이 되는 것을 방지

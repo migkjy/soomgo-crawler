@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@/components/analytics";
 import ModalProvider from "@/components/modals/providers";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
+import { SWRProvider } from "./swr-provider";
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -36,10 +37,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
             enableSystem
             disableTransitionOnChange
           >
-            <ModalProvider>{children}</ModalProvider>
-            <Analytics />
-            <Toaster richColors closeButton />
-            <TailwindIndicator />
+            <SWRProvider>
+              <ModalProvider>{children}</ModalProvider>
+              <Analytics />
+              <Toaster richColors closeButton />
+              <TailwindIndicator />
+            </SWRProvider>
           </ThemeProvider>
         </SessionProvider>
       </body>

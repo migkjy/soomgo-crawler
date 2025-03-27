@@ -39,7 +39,7 @@ export function UserRoleForm({ user }: UserNameFormProps) {
   const [isPending, startTransition] = useTransition();
   const updateUserRoleWithId = updateUserRole.bind(null, user.id);
 
-  const roles = Object.values(UserRole);
+  const roles = ["ADMIN", "USER"];
   const [role, setRole] = useState(user.role);
 
   const form = useForm<FormData>({

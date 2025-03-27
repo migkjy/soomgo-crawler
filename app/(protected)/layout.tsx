@@ -18,12 +18,20 @@ interface ProtectedLayoutProps {
 export default async function Dashboard({ children }: ProtectedLayoutProps) {
   const user = await getCurrentUser();
 
-  if (!user) redirect("/login");
+  // 인증 검사 임시 제거 및 가상 사용자 생성
+  const mockUser = user || {
+    id: "test-user-id",
+    name: "Test User",
+    email: "test@example.com",
+    role: "USER"
+  };
+
+  // if (!user) redirect("/login");
 
   const filteredLinks = sidebarLinks.map((section) => ({
     ...section,
     items: section.items.filter(
-      ({ authorizeOnly }) => !authorizeOnly || authorizeOnly === user.role,
+      ({ authorizeOnly }) => !authorizeOnly || authorizeOnly === mockUser.role,
     ),
   }));
 

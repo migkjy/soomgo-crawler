@@ -3,7 +3,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { UserRole } from "@prisma/client";
 import NextAuth, { type DefaultSession } from "next-auth";
 
-import { prisma } from "@/lib/db";
+import { db } from "@/lib/db";
 import { getUserById } from "@/lib/user";
 
 // More info: https://authjs.dev/getting-started/typescript#module-augmentation
@@ -19,7 +19,7 @@ export const {
   handlers: { GET, POST },
   auth,
 } = NextAuth({
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(db),
   session: { strategy: "jwt" },
   pages: {
     signIn: "/login",

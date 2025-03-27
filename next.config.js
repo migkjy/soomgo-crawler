@@ -25,6 +25,14 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ["@prisma/client"],
   },
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@radix-ui/react-use-callback-ref': require.resolve('@radix-ui/react-use-callback-ref'),
+      '@radix-ui/primitive': require.resolve('@radix-ui/primitive'),
+    };
+    return config;
+  },
 };
 
 module.exports = withContentlayer(nextConfig);

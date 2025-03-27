@@ -587,8 +587,39 @@ export class SoomgoCrawler {
           
           console.log('저장 중인 채팅:', chat);
           
+          // 먼저 externalId로 기존 채팅이 있는지 확인
           try {
-            // 데이터베이스에서 채팅 정보 조회
+            // 1. externalId로 기존 채팅이 있는지 먼저 확인
+            const existingByExternalId = await prisma.chat.findUnique({
+              where: { externalId: chat.id }
+            });
+            
+            if (existingByExternalId) {
+              console.log(`externalId ${chat.id}로 이미 채팅이 존재합니다. ID: ${existingByExternalId.id}`);
+              
+              // 기존 채팅 업데이트
+              await prisma.chat.update({
+                where: { id: existingByExternalId.id },
+                data: {
+                  title: chat.title,
+                  userName: chat.userName || null,
+                  serviceType: chat.serviceType || null,
+                  location: chat.location || null,
+                  lastMessage: chat.lastMessage,
+                  lastMessageTime: chat.lastMessageTime ? parseSafeDate(chat.lastMessageTime) : new Date(),
+                  hasNewMessage: chat.hasNewMessage || false,
+                  unreadCount: chat.unreadCount || 0,
+                  price: chat.price,
+                  link: chat.link,
+                  // 상태는 기존 값 유지
+                }
+              });
+              
+              console.log(`기존 채팅 업데이트 완료: ${existingByExternalId.id}`);
+              continue; // 다음 채팅으로 바로 넘어감
+            }
+            
+            // 2. id로 채팅 정보 조회
             const existingChat = await prisma.chat.findFirst({
               where: { id: chat.id },
               select: {
@@ -601,17 +632,94 @@ export class SoomgoCrawler {
               }
             });
             
-            if (!existingChat || !existingChat.externalId) {
-              setCrawlingStatus(chat.id, 'error');
-              throw new Error('채팅 정보를 찾을 수 없습니다.');
+            // 채팅 정보가 없는 경우 새로 생성
+            if (!existingChat) {
+              console.log(`채팅 ID ${chat.id}에 대한 정보가 없습니다. 새로 생성합니다.`);
+              
+              // 새 채팅 생성
+              const createdChat = await prisma.chat.create({
+                data: {
+                  externalId: chat.id,
+                  title: chat.title,
+                  userName: chat.userName || null,
+                  serviceType: chat.serviceType || null,
+                  location: chat.location || null,
+                  lastMessage: chat.lastMessage,
+                  lastMessageTime: chat.lastMessageTime ? parseSafeDate(chat.lastMessageTime) : new Date(),
+                  hasNewMessage: chat.hasNewMessage || false,
+                  unreadCount: chat.unreadCount || 0,
+                  price: chat.price,
+                  link: chat.link,
+                  status: 'NEW' // 기본 상태
+                }
+              });
+              
+              console.log(`새 채팅 생성 성공: ${createdChat.id}, externalId: ${createdChat.externalId}`);
+              continue; // 다음 채팅으로 넘어감
             }
-            
-            // 새 채팅 또는 업데이트된 채팅 저장
-            if (existingChat) {
+
+            // 기존 채팅 정보가 있지만 externalId가 없는 경우
+            if (existingChat && !existingChat.externalId) {
+              console.log(`채팅 ID ${chat.id}의 externalId가 없습니다. 업데이트합니다.`);
+              
+              // externalId 업데이트
+              await prisma.chat.update({
+                where: { id: existingChat.id },
+                data: {
+                  externalId: chat.id,
+                  title: chat.title,
+                  userName: chat.userName || null,
+                  serviceType: chat.serviceType || null,
+                  location: chat.location || null,
+                  lastMessage: chat.lastMessage,
+                  lastMessageTime: chat.lastMessageTime ? parseSafeDate(chat.lastMessageTime) : new Date(),
+                  hasNewMessage: chat.hasNewMessage || false,
+                  unreadCount: chat.unreadCount || 0,
+                  price: chat.price,
+                  link: chat.link,
+                }
+              });
+              
+              console.log(`채팅 externalId 업데이트 성공: ${existingChat.id}, externalId: ${chat.id}`);
+              continue; // 다음 채팅으로 넘어감
+            }
+
+            // 기존 채팅 정보가 있고 externalId도 있지만 다른 경우
+            if (existingChat && existingChat.externalId && existingChat.externalId !== chat.id) {
+              console.log(`채팅 ID ${chat.id}의 externalId(${existingChat.externalId})가 새 값(${chat.id})과 다릅니다.`);
+              
+              // 안전하게 처리하기 위해 새 ID로 생성
+              const randomId = `chat_${Date.now()}_${Math.round(Math.random() * 1000)}`;
+              const createdChat = await prisma.chat.create({
+                data: {
+                  id: randomId, // 새로운 ID 생성
+                  externalId: chat.id,
+                  title: chat.title,
+                  userName: chat.userName || null,
+                  serviceType: chat.serviceType || null,
+                  location: chat.location || null,
+                  lastMessage: chat.lastMessage,
+                  lastMessageTime: chat.lastMessageTime ? parseSafeDate(chat.lastMessageTime) : new Date(),
+                  hasNewMessage: chat.hasNewMessage || false,
+                  unreadCount: chat.unreadCount || 0,
+                  price: chat.price,
+                  link: chat.link,
+                  status: 'NEW' // 기본 상태
+                }
+              });
+              
+              console.log(`새 ID로 채팅 생성 성공: ${createdChat.id}, externalId: ${createdChat.externalId}`);
+              continue; // 다음 채팅으로 넘어감
+            }
+
+            // 기존 채팅 정보와 externalId가 일치하는 경우 - 정상 업데이트
+            if (existingChat && existingChat.externalId === chat.id) {
+              console.log(`채팅 ID ${chat.id}의 정보가 이미 존재합니다. 업데이트합니다.`);
+              
               // 메시지 업데이트 처리 로직
               const hasNewMessageContent = chat.lastMessage !== existingChat.title;
               
-              // 신규 메시지 판단 로직: 메시지 내용이 변경되었거나 읽지 않은 메시지 수가 증가한 경우
+              // 신규 메시지 판단 로직
               let newHasNewMessage = existingChat.hasNewMessage;
               let newUnreadCount = existingChat.unreadCount;
               
@@ -620,11 +728,11 @@ export class SoomgoCrawler {
                 newHasNewMessage = true;
               }
               
-              // 읽지 않은 메시지 수 처리: 새 값이 더 클 때만 업데이트, 작을 때는 기존 값 유지
+              // 읽지 않은 메시지 수 처리
               if (chat.unreadCount !== null && existingChat.unreadCount !== null) {
                 if (chat.unreadCount > existingChat.unreadCount) {
                   newUnreadCount = chat.unreadCount;
-                  newHasNewMessage = true; // 읽지 않은 메시지가 증가했으므로 신규 메시지로 표시
+                  newHasNewMessage = true;
                 }
               } else if (chat.unreadCount !== null) {
                 newUnreadCount = chat.unreadCount;
@@ -633,56 +741,36 @@ export class SoomgoCrawler {
               // 상태 자동 변경 로직
               let newStatus = existingChat.status;
               
-              // 신규 메시지가 감지되고 현재 상태가 NEW일 때 MESSAGED로 자동 변경
+              // 신규 메시지가 감지되고 현재 상태가 NEW일 때 IN_PROGRESS로 자동 변경
               if (newHasNewMessage && existingChat.status === 'NEW') {
-                newStatus = 'MESSAGED';
+                newStatus = 'IN_PROGRESS';
               }
               
               // 채팅 업데이트
-              const updateData = {
-                title: chat.title,
-                userName: chat.userName,
-                serviceType: chat.serviceType,
-                location: chat.location,
-                lastMessage: chat.lastMessage,
-                lastMessageTime: new Date(chat.lastMessageTime),
-                hasNewMessage: newHasNewMessage,
-                unreadCount: newUnreadCount,
-                price: chat.price,
-                link: chat.link,
-                status: newStatus, // 상태 업데이트 적용
-                updatedAt: new Date()
-              } as const;
-              
               await prisma.chat.update({
-                where: {
-                  id: existingChat.id
-                },
-                data: updateData
-              });
-            } else {
-              // 새 채팅 추가
-              await prisma.chat.create({
+                where: { id: existingChat.id },
                 data: {
-                  externalId: chat.id,
                   title: chat.title,
-                  userName: chat.userName,
-                  serviceType: chat.serviceType,
-                  location: chat.location,
+                  userName: chat.userName || null,
+                  serviceType: chat.serviceType || null,
+                  location: chat.location || null,
                   lastMessage: chat.lastMessage,
-                  lastMessageTime: new Date(chat.lastMessageTime),
-                  hasNewMessage: chat.hasNewMessage,
-                  unreadCount: chat.unreadCount,
+                  lastMessageTime: chat.lastMessageTime ? parseSafeDate(chat.lastMessageTime) : new Date(),
+                  hasNewMessage: newHasNewMessage,
+                  unreadCount: newUnreadCount,
                   price: chat.price,
                   link: chat.link,
-                  status: 'NEW', // 새 채팅은 기본 NEW 상태
-                  createdAt: new Date(),
+                  status: newStatus,
                   updatedAt: new Date()
                 }
               });
+              
+              console.log(`채팅 업데이트 완료: ${existingChat.id}`);
+              continue; // 다음 채팅으로 넘어감
             }
           } catch (error) {
             console.error('채팅 데이터 저장 중 오류:', error);
+            continue; // 오류가 발생해도 다음 채팅으로 넘어감
           }
         }
       } else {
@@ -729,15 +817,51 @@ export class SoomgoCrawler {
         }
       });
       
+      let chatUrl = '';
+
       if (!existingChat || !existingChat.externalId) {
-        setCrawlingStatus(chatId, 'error');
-        throw new Error('채팅 정보를 찾을 수 없습니다.');
+        console.log(`채팅 ID ${chatId}에 대한 정보가 없거나 externalId가 없습니다.`);
+        
+        try {
+          // 채팅 ID를 externalId로 사용하여 새 채팅 생성 시도
+          const newExternalId = chatId; // 임시로 chatId를 externalId로 사용
+          
+          const createdChat = await prisma.chat.upsert({
+            where: { id: chatId },
+            update: {
+              externalId: newExternalId,
+              title: "새 채팅",
+              status: 'NEW'
+            },
+            create: {
+              id: chatId,
+              externalId: newExternalId,
+              title: "새 채팅",
+              lastMessageTime: new Date(),
+              hasNewMessage: false,
+              unreadCount: 0,
+              status: 'NEW'
+            }
+          });
+          
+          console.log(`채팅 생성 성공: ${createdChat.id}, externalId: ${createdChat.externalId}`);
+          
+          // 생성된 채팅 정보로 계속 진행
+          chatUrl = `https://soomgo.com/pro/chats/${createdChat.externalId}?from=chatroom`;
+        } catch (createError) {
+          console.error(`채팅 생성 중 오류 발생:`, createError);
+          setCrawlingStatus(chatId, 'error');
+          return false;
+        }
+      } else {
+        // 기존 채팅 정보가 있는 경우 원래 코드 실행
+        chatUrl = `https://soomgo.com/pro/chats/${existingChat.externalId}?from=chatroom`;
       }
-      
-      const chatUrl = `https://soomgo.com/pro/chats/${existingChat.externalId}?from=chatroom`;
+
+      // 채팅방으로 이동
       console.log(`채팅방으로 이동 중... URL: ${chatUrl}`);
       await this.page.goto(chatUrl, { waitUntil: 'networkidle', timeout: 30000 });
-      
+
       // 페이지 로딩 대기
       await this.page.waitForLoadState('domcontentloaded');
       await this.page.waitForTimeout(3000);
@@ -1201,15 +1325,51 @@ export class SoomgoChatMessageCrawler {
         }
       });
       
+      let chatUrl = '';
+
       if (!existingChat || !existingChat.externalId) {
-        setCrawlingStatus(chatId, 'error');
-        throw new Error('채팅 정보를 찾을 수 없습니다.');
+        console.log(`채팅 ID ${chatId}에 대한 정보가 없거나 externalId가 없습니다.`);
+        
+        try {
+          // 채팅 ID를 externalId로 사용하여 새 채팅 생성 시도
+          const newExternalId = chatId; // 임시로 chatId를 externalId로 사용
+          
+          const createdChat = await prisma.chat.upsert({
+            where: { id: chatId },
+            update: {
+              externalId: newExternalId,
+              title: "새 채팅",
+              status: 'NEW'
+            },
+            create: {
+              id: chatId,
+              externalId: newExternalId,
+              title: "새 채팅",
+              lastMessageTime: new Date(),
+              hasNewMessage: false,
+              unreadCount: 0,
+              status: 'NEW'
+            }
+          });
+          
+          console.log(`채팅 생성 성공: ${createdChat.id}, externalId: ${createdChat.externalId}`);
+          
+          // 생성된 채팅 정보로 계속 진행
+          chatUrl = `https://soomgo.com/pro/chats/${createdChat.externalId}?from=chatroom`;
+        } catch (createError) {
+          console.error(`채팅 생성 중 오류 발생:`, createError);
+          setCrawlingStatus(chatId, 'error');
+          return false;
+        }
+      } else {
+        // 기존 채팅 정보가 있는 경우 원래 코드 실행
+        chatUrl = `https://soomgo.com/pro/chats/${existingChat.externalId}?from=chatroom`;
       }
-      
-      const chatUrl = `https://soomgo.com/pro/chats/${existingChat.externalId}?from=chatroom`;
+
+      // 채팅방으로 이동
       console.log(`채팅방으로 이동 중... URL: ${chatUrl}`);
       await this.page.goto(chatUrl, { waitUntil: 'networkidle', timeout: 30000 });
-      
+
       // 페이지 로딩 대기
       await this.page.waitForLoadState('domcontentloaded');
       await this.page.waitForTimeout(3000);
@@ -1439,5 +1599,44 @@ export class SoomgoChatMessageCrawler {
       console.error('메시지 저장 중 오류 발생:', error);
       throw error;
     }
+  }
+}
+
+// 헬퍼 함수: 문자열 형식의 날짜를 안전하게 Date 객체로 변환
+function parseSafeDate(dateStr: string): Date {
+  try {
+    // '2025. 02. 13' 형식 처리
+    if (/^\d{4}\.\s\d{2}\.\s\d{2}$/.test(dateStr)) {
+      // 점과 공백 제거하고 하이픈으로 변환
+      const normalized = dateStr.replace(/\./g, '-').replace(/\s/g, '');
+      return new Date(normalized);
+    } 
+    // '시간 전' 형식 처리
+    else if (dateStr.includes('시간 전')) {
+      const hours = parseInt(dateStr.split('시간')[0].trim()) || 1;
+      const date = new Date();
+      date.setHours(date.getHours() - hours);
+      return date;
+    }
+    // '일 전' 형식 처리
+    else if (dateStr.includes('일 전')) {
+      const days = parseInt(dateStr.split('일')[0].trim()) || 1;
+      const date = new Date();
+      date.setDate(date.getDate() - days);
+      return date;
+    }
+    // '분 전' 형식 처리
+    else if (dateStr.includes('분 전')) {
+      const minutes = parseInt(dateStr.split('분')[0].trim()) || 1;
+      const date = new Date();
+      date.setMinutes(date.getMinutes() - minutes);
+      return date;
+    }
+    // 다른 형식은 현재 시간으로 설정
+    return new Date();
+  } catch (error) {
+    console.error(`날짜 변환 중 오류 발생: ${dateStr}`, error);
+    // 오류 발생 시 현재 시간 반환
+    return new Date();
   }
 } 

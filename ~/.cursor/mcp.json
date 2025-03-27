@@ -1,0 +1,37 @@
+{
+    "mcpServers": {
+      "mcp-server-firecrawl": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@smithery/cli@latest",
+          "run",
+          "@mendableai/mcp-server-firecrawl",
+          "--config",
+          "{\"fireCrawlApiKey\":\"fc-b7efb0aa061c4dd89c15609c2bdef963\"}"
+        ]
+      },
+      "neon": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@smithery/cli@latest",
+          "run",
+          "neon",
+          "--config",
+          "{\"neonApiKey\":\"napi_xroft307pz4alxx43er3fbry8sq3dqm87te8c96gech1v6vsav2ltlku381mnccc\"}"
+        ]
+      },
+      "vercel-api-mcp-fork": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@smithery/cli@latest",
+          "run",
+          "@ssdavidai/vercel-api-mcp-fork",
+          "--config",
+          "{\"vercelApiKey\":\"xD0kpl9Gz46KpTrVQUxl91bn\"}"
+        ]
+      }
+    }
+} 
